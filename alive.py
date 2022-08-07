@@ -10,15 +10,26 @@ print("Current Directory :--> "+os.getcwd())
 cmd_home="/home/aditya.singh/.ssh/wekapp_v4/wekapp/"
 os.chdir(cmd_home)
 print("Directory Path pointed to :-> "+os.getcwd())
-cluster_name=input("Enter the cluster name to alive it since it is cancelled : ")
+cluster_name=input("\nEnter the cluster name to alive it for the day : ")
 cmd_alive="./teka lab keepalive "+cluster_name
-os.system(cmd_alive)
-print("Keeping system Alive ")
-time.sleep(216000)
-print("keeping system Alive for the second time ")
-os.system(cmd_alive)
-time.sleep(216000)
-print("keeping system Alive for the second time ")
-os.system(cmd_alive)
-
-
+inp_hours=input("For how many hours you want to keep the system alive (in Hours) :  ")
+for i in range(1,int(inp_hours)+1):
+    print("Machine running from  "+str(i)+" hour ")
+    os.system(cmd_alive)
+    time.sleep(3600)
+    if i==48:  
+        cmd_kill="./teka lab kill --destroy "+cluster_name
+        os.system(cmd_kill)
+        print("Cluster Destroyed Successfully ")
+        time.sleep(10)
+        cmd_kill="./teka lab list"
+        os.system(cmd_kill)
+        print(" Verification Successfull ")
+        exit()
+cmd_kill_1="./teka lab kill --destroy "+cluster_name
+os.system(cmd_kill_1)
+time.sleep(10)
+print("Cluster Destroyed Successfully ")
+cmd_list="./teka lab list"
+os.system(cmd_list)
+print(" Verification Successfull ")
