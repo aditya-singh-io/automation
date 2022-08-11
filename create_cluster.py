@@ -16,12 +16,16 @@ name=''
 user_name=''
 email=''
 working_dir=''
-with open("config.csv", 'r') as file:
-	obj = list(csv.reader(file))
-	name=obj[1][0]
-	user_name=obj[1][1]
-	email=obj[1][2]
-	working_dir=obj[1][3]
+try:
+	with open("config.csv", 'r') as file:
+		obj = list(csv.reader(file))
+		name=obj[1][0]
+		user_name=obj[1][1]
+		email=obj[1][2]
+		working_dir=obj[1][3]
+except:
+	print("\nPlease complete the setup first ! Thank you..! \nBye\n")
+	exit()
 print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 print("Current Directory :--> "+os.getcwd())
 cmd_home=working_dir
