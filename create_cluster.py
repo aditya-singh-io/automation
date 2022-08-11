@@ -45,23 +45,26 @@ def particular_build():
 	print("\n*************Entering Specific build Cluster formation Module******************\n")
 	cluster_name=input("Enter the cluster name : ")
 	size=5
-	try:	
-		size=int(input("Enter the size of the backends to be needed. By default it is 5 : ")) 
+	try:
+		size_inp=input("Enter the size of the backends to be needed. By default it is 5 : ")
+		size=int(size_inp)
 	except:
-		size=5	
-	version='--from-version '
-	ver_in=input("Enter the build version you want ? : ")
+		size=5
+	ver_in=input("Enter the build version you want ? (Optional) default: Latest Build  : ")
 	cmd=''
-	if len(ver_in)>0:
-		if size>0:
-			cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env=oci && ./teka install --from-version '+ver_in+' '+cluster_name
-		else:	
-			cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --env=oci && ./teka install --from-version '+ver_in+' '+cluster_name
+	if len(ver_in)>3:
+		print("Installing cluster with below mentioned details ")
+		print("Cluster name "+cluster_name)		
+		print("Size of the BE ",size)
+		print("Build to be installed in the cluster "+ver_in)
+		cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env=oci && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
-		if len(size)>0:
-			cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env=oci && ./teka install '+cluster_name
-		else:	
-			cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --env=oci && ./teka install '+cluster_name
+		print("Installing cluster with latest Default Build")
+		print("Installing cluster with below mentioned details ")
+		print("Cluster name "+cluster_name)		
+		print("Size of the BE ",size)
+		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
+		cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env=oci && ./teka install '+cluster_name
 	os.system(cmd)
 
 def mbc_cluster():
@@ -84,7 +87,7 @@ def checkout_3_13_dev_staging():
 	time.sleep(10)
 	cmd_2='git status'
 	os.system(cmd_2)
-	time.sleep(20)
+	time.sleep(1)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(20)
@@ -99,7 +102,7 @@ def checkout_3_14_dev_staging():
 	time.sleep(10)
 	cmd_2='git status'
 	os.system(cmd_2)
-	time.sleep(20)
+	time.sleep(1)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(20)
@@ -111,13 +114,19 @@ def checkout_3_14_dev_staging():
 def checkout_4_0_dev():
 	cmd_1='git checkout CI/4.0-dev'
 	os.system(cmd_1)
-	time.sleep(10)
+	time.sleep(3)
 	cmd_2='git status'
 	os.system(cmd_2)
-	time.sleep(20)
+	time.sleep(1)
+	cmd_5="git stash"
+	time.sleep(5)
+	os.system(cmd_5)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
-	time.sleep(20)
+	time.sleep(10)
+	cmd_6="git stash pop"
+	os.system(cmd_6)
+	time.sleep(5)
 	cmd_4='git submodule update --init --recursive'
 	os.system(cmd_4)
 	time.sleep(20)
