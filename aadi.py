@@ -148,3 +148,7 @@ def checkout_particular():
 	time.sleep(20)
 	print("Command Ran Successfully")
 
+def clear():
+	cmd='clear'
+	os.system(cmd)
+

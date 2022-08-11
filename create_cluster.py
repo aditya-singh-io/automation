@@ -5,20 +5,30 @@
 
 import os
 import time
+import csv
 import aadi as func
 
 #######################
 ##########################
 ############################
-
-cmd_clear='clear'
-os.system(cmd_clear)
+func.clear()
+name=''
+user_name=''
+email=''
+working_dir=''
+with open("config.csv", 'r') as file:
+	obj = list(csv.reader(file))
+	name=obj[1][0]
+	user_name=obj[1][1]
+	email=obj[1][2]
+	working_dir=obj[1][3]
 print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 print("Current Directory :--> "+os.getcwd())
-cmd_home="/home/aditya.singh/.ssh/wekapp_v4/wekapp/"
+cmd_home=working_dir
 os.chdir(cmd_home)
 print("Directory Path pointed to :-> "+os.getcwd())
 cmd_create=""
+print("\nHi "+name+"! Please find the options below ")
 print("\n****SELECT THE OPTION BELOW******\n")
 print("[1]. Default Cluster ( 5 Backends and 2 Clients )")
 print("[2]. MBC Cluster ( 6 Backends and 0 Clients )")
