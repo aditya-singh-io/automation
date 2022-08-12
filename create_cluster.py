@@ -24,7 +24,10 @@ try:
 		email=obj[1][2]
 		working_dir=obj[1][3]
 except:
-	print("\nPlease complete the setup first ! Thank you..! \nBye\n")
+	print("\nHello! You are using this tool for the first time. Complete one time setup below !\n\n")
+	x_d=input("Do you want to Enter the setup Mode y/Y/Yes/No : ")
+	if 'y' in x_d or 'Y' in x_d:
+		import setup
 	exit()
 print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 print("Current Directory :--> "+os.getcwd())
@@ -48,6 +51,7 @@ print("[3]. Tesla Failure Domain(FD) Config Cluster ( 8 Backends and 0 Clients &
 print("[4]. Create cluster with Staless Client and custom build & size of BE ")
 print("[5]. I don't like automation! I will create my cluster with Command ")
 print("[6]. Checkout to a particular branch")
+print("[7]. Exit")
 input_1=int(input("\nEnter the number from above list : "))
 input_checkout=0
 if input_1==1:
@@ -90,6 +94,13 @@ elif input_1==6:
 		func.checkout_particular()
 	elif input_checkout==5:
 		exit()
+elif input_1==7:
+	func.clear()
+	print("\n\n\n\n")
+	print("Thanks for using this tool "+name+"! See you soon!\n\n\n\n")
+	time.sleep(4	)
+	func.clear()
+	exit()
 else:
 	print("Functionality not available for now..! Destroying self in 5 secs")
 	time.sleep(5)
