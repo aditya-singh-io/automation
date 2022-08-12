@@ -34,6 +34,9 @@ try:
 except:
 	print("\nWarning : You have entered incorrect path during setup. Please start the setup again and provide correct value\n")
 	print("This path doesn't exists : "+working_dir+"\n")
+	x_d=input("Do you want to Enter the setup Mode y/Y/Yes/No : ")
+	if 'y' in x_d or 'Y' in x_d:
+		import setup
 	exit()
 print("Directory Path pointed to :-> "+os.getcwd())
 cmd_create=""
