@@ -54,9 +54,9 @@ def particular_build():
 	cmd=''
 	if len(ver_in)>3:
 		print("Installing cluster with below mentioned details ")
-		print("Cluster name :"+cluster_name)		
+		print("Cluster name : "+cluster_name)		
 		print("Size of the BE :",size)
-		print("Build to be installed in the cluster :"+ver_in)
+		print("Build to be installed in the cluster : "+ver_in)
 		cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env=oci && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
 		print("Installing cluster with latest Default Build")
@@ -107,8 +107,8 @@ def checkout_3_14_dev_staging():
 	os.system(cmd_2)
 	time.sleep(2)
 	cmd_5="git stash"
-	time.sleep(5)
 	os.system(cmd_5)
+	time.sleep(3)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(5)
@@ -125,8 +125,8 @@ def checkout_4_0_dev():
 	os.system(cmd_2)
 	time.sleep(2)
 	cmd_5="git stash"
-	time.sleep(5)
 	os.system(cmd_5)
+	time.sleep(3)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(5)
