@@ -54,15 +54,15 @@ def particular_build():
 	cmd=''
 	if len(ver_in)>3:
 		print("Installing cluster with below mentioned details ")
-		print("Cluster name "+cluster_name)		
-		print("Size of the BE ",size)
-		print("Build to be installed in the cluster "+ver_in)
+		print("Cluster name :"+cluster_name)		
+		print("Size of the BE :",size)
+		print("Build to be installed in the cluster :"+ver_in)
 		cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env=oci && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
 		print("Installing cluster with latest Default Build")
 		print("Installing cluster with below mentioned details ")
-		print("Cluster name "+cluster_name)		
-		print("Size of the BE ",size)
+		print("Cluster name :"+cluster_name)		
+		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
 		cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env=oci && ./teka install '+cluster_name
 	os.system(cmd)
