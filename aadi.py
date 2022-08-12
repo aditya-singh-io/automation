@@ -16,7 +16,7 @@ def default_cluster():
 	option=input("Do you want to create Default cluster ? y/Yes/No : ")
 	if 'y' in option or 'Y' in option:
 		cluster_name=input("Enter the cluster name : Note: Don't use _ or Underscore :")
-		print("\nSuccess..! Cluster Creation in progress \n")
+		print("\nCluster Creation in progress. Please wait for 10-15 mins \n")
 		cmd_create="./teka lab provision --template m5-clients-instance.yaml {} --size=6 && ./teka install {}".format(cluster_name,cluster_name)
 		os.system(cmd_create)
 		print("Cluster created Successfully. ! Pls run details from Automation tool ")		
@@ -84,68 +84,74 @@ def tesla_fd_config():
 def checkout_3_13_dev_staging():
 	cmd_1='git checkout CI/3.13-dev-staging'
 	os.system(cmd_1)
-	time.sleep(10)
+	time.sleep(2)
 	cmd_2='git status'
 	os.system(cmd_2)
-	time.sleep(1)
-	cmd_3='git pull --rebase'
-	os.system(cmd_3)
-	time.sleep(20)
-	cmd_4='git submodule update --init --recursive'
-	os.system(cmd_4)
-	time.sleep(20)
-	print("Command Ran Successfully")
-
-def checkout_3_14_dev_staging():
-	cmd_1='git checkout CI/3.14-dev-staging'
-	os.system(cmd_1)
-	time.sleep(10)
-	cmd_2='git status'
-	os.system(cmd_2)
-	time.sleep(1)
-	cmd_3='git pull --rebase'
-	os.system(cmd_3)
-	time.sleep(20)
-	cmd_4='git submodule update --init --recursive'
-	os.system(cmd_4)
-	time.sleep(20)
-	print("Command Ran Successfully")
-
-def checkout_4_0_dev():
-	cmd_1='git checkout CI/4.0-dev'
-	os.system(cmd_1)
-	time.sleep(3)
-	cmd_2='git status'
-	os.system(cmd_2)
-	time.sleep(1)
+	time.sleep(2)
 	cmd_5="git stash"
 	time.sleep(5)
 	os.system(cmd_5)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
-	time.sleep(10)
-	cmd_6="git stash pop"
-	os.system(cmd_6)
 	time.sleep(5)
 	cmd_4='git submodule update --init --recursive'
 	os.system(cmd_4)
-	time.sleep(20)
+	time.sleep(5)
+	print("Command Ran Successfully")
+
+def checkout_3_14_dev_staging():
+	cmd_1='git checkout CI/3.14-dev-staging'
+	os.system(cmd_1)
+	time.sleep(2)
+	cmd_2='git status'
+	os.system(cmd_2)
+	time.sleep(2)
+	cmd_5="git stash"
+	time.sleep(5)
+	os.system(cmd_5)
+	cmd_3='git pull --rebase'
+	os.system(cmd_3)
+	time.sleep(5)
+	cmd_4='git submodule update --init --recursive'
+	os.system(cmd_4)
+	time.sleep(5)
+	print("Command Ran Successfully")
+
+def checkout_4_0_dev():
+	cmd_1='git checkout CI/4.0-dev'
+	os.system(cmd_1)
+	time.sleep(2)
+	cmd_2='git status'
+	os.system(cmd_2)
+	time.sleep(2)
+	cmd_5="git stash"
+	time.sleep(5)
+	os.system(cmd_5)
+	cmd_3='git pull --rebase'
+	os.system(cmd_3)
+	time.sleep(5)
+	cmd_4='git submodule update --init --recursive'
+	os.system(cmd_4)
+	time.sleep(5)
 	print("Command Ran Successfully")
 
 def checkout_particular():
 	input_branch=input('Enter the branch you want to checkout.( E.g: 4.0-dev-staging ) --> : ')
 	cmd_1='git checkout CI/'+input_branch
 	os.system(cmd_1)
-	time.sleep(10)
+	time.sleep(2)
 	cmd_2='git status'
 	os.system(cmd_2)
-	time.sleep(20)
+	time.sleep(2)
+	cmd_5="git stash"
+	time.sleep(5)
+	os.system(cmd_5)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
-	time.sleep(20)
+	time.sleep(5)
 	cmd_4='git submodule update --init --recursive'
 	os.system(cmd_4)
-	time.sleep(20)
+	time.sleep(5)
 	print("Command Ran Successfully")
 
 def clear():

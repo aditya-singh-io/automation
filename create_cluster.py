@@ -29,7 +29,12 @@ except:
 print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 print("Current Directory :--> "+os.getcwd())
 cmd_home=working_dir
-os.chdir(cmd_home)
+try:
+	os.chdir(cmd_home)
+except:
+	print("\nWarning : You have entered incorrect path during setup. Please start the setup again and provide correct value\n")
+	print("This path doesn't exists : "+working_dir+"\n")
+	exit()
 print("Directory Path pointed to :-> "+os.getcwd())
 cmd_create=""
 print("\nHi "+name+"! Please find the options below ")
@@ -43,25 +48,25 @@ print("[6]. Checkout to a particular branch")
 input_1=int(input("\nEnter the number from above list : "))
 input_checkout=0
 if input_1==1:
-	os.system(cmd_clear)
+	func.clear()
 	func.default_cluster()
 elif input_1==2:
-	os.system(cmd_clear)
+	func.clear()
 	func.mbc_cluster()
 elif input_1==3:
-	os.system(cmd_clear)
+	func.clear()
 	func.tesla_fd_config()
 elif input_1==4:
-	os.system(cmd_clear)
+	func.clear()
 	func.particular_build()
 elif input_1==5:
-	os.system(cmd_clear)
+	func.clear()
 	print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 	print("\n*************Entering Command Cluster formation Module******************\n")
 	cmd_create=input("Enter the teka command to create cluster e.g. ./teka lab provision --> : ")
 	os.system(cmd_create)
 elif input_1==6:
-	os.system(cmd_clear)
+	func.clear()
 	print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 	print("\n****SELECT THE OPTION BELOW******\n")
 	print("[1]. Checkout to a 3.13-dev-staging branch ")
@@ -85,5 +90,5 @@ elif input_1==6:
 else:
 	print("Functionality not available for now..! Destroying self in 5 secs")
 	time.sleep(5)
-	os.system(cmd_clear)
+	func.clear()
 	exit()
