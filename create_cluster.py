@@ -29,7 +29,7 @@ except:
 	if 'y' in x_d or 'Y' in x_d:
 		import setup
 	exit()
-cmd_cp='cp default.yaml '+working_dir+'/qa/setups/templates/'
+cmd_cp='cp template/default.yaml '+working_dir+'/qa/setups/templates/'
 os.system(cmd_cp)
 print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 print("Current Directory :--> "+os.getcwd())
