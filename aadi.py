@@ -24,11 +24,11 @@ def default_cluster():
 		cmd_create="./teka lab provision --template default.yaml {} --size=6  --env={} && ./teka install {}".format(cluster_name,env,cluster_name)
 		os.system(cmd_create)
 		print("Cluster created Successfully. ! Pls run details from Automation tool ")		
-		time.sleep(216000)
+		time.sleep(3600)
 		cmd_alive="./teka lab keepalive "+cluster_name
 		os.system(cmd_alive)
 		print("Keeping system Alive ")
-		time.sleep(216000)
+		time.sleep(3600)
 		print("keeping system Alive for the second time ")
 		os.system(cmd_alive)
 		
@@ -146,14 +146,22 @@ def mbc_cluster():
 	print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 	print("\n*************Entering MBC Cluster formation Module******************\n")
 	cluster_name=input("Enter the cluster name : ")
-	cmd='./teka lab provision '+cluster_name+' --size 6 --type i3.2xlarge --env oci --ionode-count 3 --mbc-installation=yes -f && ./teka install '+cluster_name
+	inp_env='oci'
+	env=input("Enter the environment aws/oci (Default: OCI): ")
+	if len(env)>2:
+		inp_env=env
+	cmd='./teka lab provision '+cluster_name+' --size 6 --type i3.2xlarge --env '+inp_env+' --ionode-count 3 --mbc-installation=yes -f && ./teka install '+cluster_name
 	os.system(cmd)
 
 def tesla_fd_config():
 	print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 	print("\n*************Entering TESLA FD CONFIG cluster formation Module******************\n")
 	cluster_name=input("Enter the cluster name : ")
-	cmd="./teka lab provision "+cluster_name+" --size 8 --type i3.xlarge --env oci --hosts-per-failure-domain AUTO && ./teka install "+cluster_name
+	inp_env='oci'
+	env=input("Enter the environment aws/oci (Default: OCI): ")
+	if len(env)>2:
+		inp_env=env
+	cmd="./teka lab provision "+cluster_name+" --size 8 --type i3.xlarge --env "+inp_env+" --hosts-per-failure-domain AUTO && ./teka install "+cluster_name
 	os.system(cmd)
 
 def checkout_3_13_dev_staging():
