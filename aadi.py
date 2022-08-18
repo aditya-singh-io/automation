@@ -15,7 +15,7 @@ def default_cluster():
 	print("\n*************Entering Default Cluster formation Module******************\n")
 	option=input("Do you want to create Default cluster ? y/Yes/No : ")
 	env='oci'
-	size=6
+	size=5
 	if 'y' in option or 'Y' in option:
 		cluster_name=input("Enter the cluster name : Note: Don't use _ or Underscore : ")
 		inp_env=input("Please enter Env oci/aws ? (Default: oci ) : ")
@@ -24,7 +24,7 @@ def default_cluster():
 			if int(inp_size)>4:
 				size=int(inp_size) 
 		except:
-			size=6		
+			size=5	
 		if len(env)>2:
 			env=inp_env
 		print("\nCluster Creation in progress. Please wait for 10-15 mins \n")
