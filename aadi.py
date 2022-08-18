@@ -15,13 +15,20 @@ def default_cluster():
 	print("\n*************Entering Default Cluster formation Module******************\n")
 	option=input("Do you want to create Default cluster ? y/Yes/No : ")
 	env='oci'
+	size=6
 	if 'y' in option or 'Y' in option:
 		cluster_name=input("Enter the cluster name : Note: Don't use _ or Underscore : ")
 		inp_env=input("Please enter Env oci/aws ? (Default: oci ) : ")
+		inp_size=input("Enter the number of the backends required : ")
+		try:
+			if int(inp_size)>4:
+				size=int(inp_size) 
+		except:
+			size=6		
 		if len(env)>2:
 			env=inp_env
 		print("\nCluster Creation in progress. Please wait for 10-15 mins \n")
-		cmd_create="./teka lab provision --template default.yaml {} --size=6  --env={} && ./teka install {}".format(cluster_name,env,cluster_name)
+		cmd_create="./teka lab provision --template default.yaml {} --size={} --type i3.xlarge --env={} && ./teka install {}".format(cluster_name,size,env,cluster_name)
 		os.system(cmd_create)
 		print("Cluster created Successfully. ! Pls run details from Automation tool ")		
 		time.sleep(3600)
@@ -165,15 +172,15 @@ def tesla_fd_config():
 	os.system(cmd)
 
 def checkout_3_13_dev_staging():
+	cmd_5="git stash"
+	os.system(cmd_5)
+	time.sleep(2)	
 	cmd_1='git checkout CI/3.13-dev-staging'
 	os.system(cmd_1)
 	time.sleep(2)
 	cmd_2='git status'
 	os.system(cmd_2)
 	time.sleep(2)
-	cmd_5="git stash"
-	time.sleep(5)
-	os.system(cmd_5)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(5)
@@ -183,15 +190,15 @@ def checkout_3_13_dev_staging():
 	print("Command Ran Successfully")
 
 def checkout_3_14_dev_staging():
+	cmd_5="git stash"
+	os.system(cmd_5)
+	time.sleep(3)	
 	cmd_1='git checkout CI/3.14-dev-staging'
 	os.system(cmd_1)
 	time.sleep(2)
 	cmd_2='git status'
 	os.system(cmd_2)
 	time.sleep(2)
-	cmd_5="git stash"
-	os.system(cmd_5)
-	time.sleep(3)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(5)
@@ -201,15 +208,15 @@ def checkout_3_14_dev_staging():
 	print("Command Ran Successfully")
 
 def checkout_4_0_dev():
+	cmd_5="git stash"
+	os.system(cmd_5)
+	time.sleep(3)
 	cmd_1='git checkout CI/4.0-dev'
 	os.system(cmd_1)
 	time.sleep(2)
 	cmd_2='git status'
 	os.system(cmd_2)
 	time.sleep(2)
-	cmd_5="git stash"
-	os.system(cmd_5)
-	time.sleep(3)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(5)
@@ -220,15 +227,15 @@ def checkout_4_0_dev():
 
 def checkout_particular():
 	input_branch=input('Enter the branch you want to checkout.( E.g: 4.0-dev-staging ) --> : ')
+	cmd_5="git stash"
+	os.system(cmd_5)
+	time.sleep(5)
 	cmd_1='git checkout CI/'+input_branch
 	os.system(cmd_1)
 	time.sleep(2)
 	cmd_2='git status'
 	os.system(cmd_2)
 	time.sleep(2)
-	cmd_5="git stash"
-	time.sleep(5)
-	os.system(cmd_5)
 	cmd_3='git pull --rebase'
 	os.system(cmd_3)
 	time.sleep(5)
