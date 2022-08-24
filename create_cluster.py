@@ -29,6 +29,8 @@ except:
 	if 'y' in x_d or 'Y' in x_d:
 		import setup
 	exit()
+cmd_cp='cp template/* '+working_dir+'/qa/setups/templates/'
+os.system(cmd_cp)
 print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 print("Current Directory :--> "+os.getcwd())
 cmd_home=working_dir
@@ -48,10 +50,12 @@ print("\n****SELECT THE OPTION BELOW******\n")
 print("[1]. Default Cluster ( 5 Backends and 2 Clients )")
 print("[2]. MBC Cluster ( 6 Backends and 0 Clients )")
 print("[3]. Tesla Failure Domain(FD) Config Cluster ( 8 Backends and 0 Clients &  i3.xlarge & FD=AUTO)")
-print("[4]. Create cluster with Staless Client and custom build & size of BE ")
-print("[5]. I don't like automation! I will create my cluster with Command ")
-print("[6]. Checkout to a particular branch")
-print("[7]. Exit")
+print("[4]. Create cluster with Stateless Client and custom build & size of BE ")
+print("[5]. Create cluster with Stateful Client and custom build & size of BE ")
+print("[6]. Create cluster with all custom details including env, template, size ")
+print("[7]. I don't like automation! I will create my cluster with Command ")
+print("[8]. Checkout to a particular branch")
+print("[9]. Exit")
 input_1=int(input("\nEnter the number from above list : "))
 input_checkout=0
 if input_1==1:
@@ -68,11 +72,17 @@ elif input_1==4:
 	func.particular_build()
 elif input_1==5:
 	func.clear()
+	func.particular_build_stateful()
+elif input_1==6:
+	func.clear()
+	func.custom_details()
+elif input_1==7:
+	func.clear()
 	print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 	print("\n*************Entering Command Cluster formation Module******************\n")
 	cmd_create=input("Enter the teka command to create cluster e.g. ./teka lab provision --> : ")
 	os.system(cmd_create)
-elif input_1==6:
+elif input_1==8:
 	func.clear()
 	print("\n **********Automated tool created by @d!+y@ S!ng#*********** \n")
 	print("\n****SELECT THE OPTION BELOW******\n")
@@ -94,7 +104,7 @@ elif input_1==6:
 		func.checkout_particular()
 	elif input_checkout==5:
 		exit()
-elif input_1==7:
+elif input_1==9:
 	func.clear()
 	print("\n\n\n\n")
 	print("Thanks for using this tool "+name+"! See you soon!\n\n\n\n")

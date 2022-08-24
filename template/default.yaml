@@ -1,0 +1,19 @@
+globals:
+  env: aws
+
+subclusters:
+  primary:
+    host_role: CONVERGED
+  
+  stateless-clients:
+    host_role: STATELESS_CLIENT
+    profile: profiles/client
+    ionode_count: 2
+    instance_types: r3.2xlarge
+    size: 1
+
+  clients:
+    profile: profiles/client-multi-instance
+    size: 1
+    instance_types: m5.xlarge
+
