@@ -4,7 +4,7 @@ globals:
 subclusters:
   primary:
     host_role: CONVERGED
-
+  
   stateless-clients:
     host_role: STATELESS_CLIENT
     profile: profiles/client

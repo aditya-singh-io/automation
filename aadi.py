@@ -157,7 +157,7 @@ def mbc_cluster():
 	env=input("Enter the environment aws/oci (Default: OCI): ")
 	if len(env)>2:
 		inp_env=env
-	cmd='./teka lab provision '+cluster_name+' --size 6 --type i3.2xlarge --env '+inp_env+' --ionode-count 3 --mbc-installation=yes -f && ./teka install '+cluster_name
+	cmd='./teka lab provision '+cluster_name+' --size 6 --type i3.2xlarge --template default.yaml --env '+inp_env+' --ionode-count 3 --mbc-installation=yes -f && ./teka install '+cluster_name
 	os.system(cmd)
 
 def tesla_fd_config():
