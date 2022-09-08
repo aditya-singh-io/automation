@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.7
-#Program to create cluster
+#Program to alive cluster
 ####
 ######@Author : Aditya Singh alias: aditya.singh@weka.io
 

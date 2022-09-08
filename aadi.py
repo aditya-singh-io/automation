@@ -72,7 +72,7 @@ def particular_build():
 		print("Cluster name : "+cluster_name)		
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : "+ver_in)
-		cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
+		cmd='./teka lab provision --template stateless.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
 		print("Installing cluster with latest Default Build")
 		print("Installing cluster with below mentioned details ")
@@ -80,7 +80,7 @@ def particular_build():
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
 		#cmd='./teka lab provision --template=adi.yaml '+cluster_name+' --size '+str(size)+' --env=aws && ./teka install '+cluster_name
-		cmd='./teka lab provision --template=stateless-clients-testing.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install '+cluster_name
+		cmd='./teka lab provision --template stateless.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install '+cluster_name
 	os.system(cmd)
 
 def particular_build_stateful():
@@ -104,14 +104,14 @@ def particular_build_stateful():
 		print("Cluster name : "+cluster_name)		
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : "+ver_in)
-		cmd='./teka lab provision --template=m5-clients-instance.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
+		cmd='./teka lab provision --template stateful.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
 		print("Installing cluster with latest Default Build")
 		print("Installing cluster with below mentioned details ")
 		print("Cluster name :"+cluster_name)		
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
-		cmd='./teka lab provision --template default.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install '+cluster_name
+		cmd='./teka lab provision --template stateful.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install '+cluster_name
 	os.system(cmd)
 
 def custom_details():
@@ -130,8 +130,8 @@ def custom_details():
 	env=input("Enter the environment aws/oci (Default: OCI): ")
 	if len(env)>2:
 		inp_env=env
-	template='stateless-clients-testing.yaml'
-	temp_inp=input("Enter the template (Default: stateless-clients-testing.yaml): ")
+	template='default.yaml'
+	temp_inp=input("Enter the template (Default: default.yaml): ")
 	if len(temp_inp)>3:
 		template=temp_inp
 	if len(ver_in)>3:
@@ -155,9 +155,41 @@ def mbc_cluster():
 	cluster_name=input("Enter the cluster name : ")
 	inp_env='oci'
 	env=input("Enter the environment aws/oci (Default: OCI): ")
+	size=6
+	size_inp=input("Enter the Number of BE Host Required (Default: 6) : ")
+	ver_in=input("Enter the build version you want ? (Optional) default: Latest Build  : ")
+	input_io=input("Enter the ionodes for the MBC cluster (Default: 3) : ")
+	io_node=3
+	try:
+		if int(input_io)>1:
+			io_node=int(input_io)
+	except:
+		print("Taking ionode count as 3")
+
+	try:
+		if int(size_inp)>6:
+			size=int(size_inp)
+	except:
+		size=6
 	if len(env)>2:
 		inp_env=env
-	cmd='./teka lab provision '+cluster_name+' --size 6 --type i3.2xlarge --template default.yaml --env '+inp_env+' --ionode-count 3 --mbc-installation=yes -f && ./teka install '+cluster_name
+	if len(ver_in)>3:
+		print("Installing cluster with below mentioned details ")
+		print("Cluster name : "+cluster_name)		
+		print("Size of the BE :",size)
+		print("Build to be installed in the cluster : "+ver_in)
+		print("ionodes : "+str(io_node))
+		cmd='./teka lab provision '+cluster_name+' --size '+str(size)+' --type i3.xlarge --template default.yaml --env '+inp_env+' --ionode-count '+str(io_node)+' --mbc-installation=yes -f && ./teka install --from-version '+ver_in+' '+cluster_name
+	else:
+		print("Installing cluster with latest Default Build")
+		print("Installing cluster with below mentioned details ")
+		print("***Details of the cluster to be formed")
+		print("Environment : "+inp_env)
+		print("Size of BE  : ",size)
+		print("Type : MBC ")
+		print("ionodes : "+str(io_node))
+		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
+		cmd='./teka lab provision '+cluster_name+' --size '+str(size)+' --type i3.xlarge --template default.yaml --env '+inp_env+' --ionode-count '+str(io_node)+' --mbc-installation=yes -f && ./teka install '+cluster_name
 	os.system(cmd)
 
 def tesla_fd_config():
