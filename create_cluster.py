@@ -28,6 +28,9 @@ except:
 	x_d=input("Do you want to Enter the setup Mode y/Y/Yes/No : ")
 	if 'y' in x_d or 'Y' in x_d:
 		import setup
+	else:
+		print("Thanks! See you soon. Exiting now")
+		func.clear()
 	exit()
 cmd_cp='cp template/* '+working_dir+'/qa/setups/templates/'
 os.system(cmd_cp)
