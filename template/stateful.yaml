@@ -1,0 +1,12 @@
+globals:
+  env: aws
+
+subclusters:
+  primary:
+    host_role: CONVERGED
+
+  clients:
+    profile: profiles/client-multi-instance
+    size: 2
+    instance_types: m5.xlarge
+
