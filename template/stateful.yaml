@@ -4,9 +4,9 @@ globals:
 subclusters:
   primary:
     host_role: CONVERGED
-
+  
   clients:
     profile: profiles/client-multi-instance
-    size: 2
+    size: 1
     instance_types: m5.xlarge
 

@@ -10,5 +10,6 @@ subclusters:
     profile: profiles/client
     ionode_count: 2
     instance_types: r3.2xlarge
-    size: 2
+    size: 1 
+
 

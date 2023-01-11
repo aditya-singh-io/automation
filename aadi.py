@@ -28,7 +28,7 @@ def default_cluster():
 		if len(env)>2:
 			env=inp_env
 		print("\nCluster Creation in progress. Please wait for 10-15 mins \n")
-		cmd_create="./teka lab provision --template default.yaml {} --size={} --type i3.xlarge --env={} && ./teka install {}".format(cluster_name,size,env,cluster_name)
+		cmd_create="./teka lab provision --template new.yaml {} --size={} --type i3.xlarge --env={} --os ubuntu20  && ./teka install {}".format(cluster_name,size,env,cluster_name)
 		os.system(cmd_create)
 		print("Cluster created Successfully. ! Pls run details from Automation tool ")		
 		time.sleep(3600)
@@ -72,7 +72,7 @@ def particular_build():
 		print("Cluster name : "+cluster_name)		
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : "+ver_in)
-		cmd='./teka lab provision --template stateless.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
+		cmd='./teka lab provision --template stateless.yaml '+cluster_name+' --size '+str(size)+' --os ubuntu18 --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
 		print("Installing cluster with latest Default Build")
 		print("Installing cluster with below mentioned details ")
@@ -80,7 +80,7 @@ def particular_build():
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
 		#cmd='./teka lab provision --template=adi.yaml '+cluster_name+' --size '+str(size)+' --env=aws && ./teka install '+cluster_name
-		cmd='./teka lab provision --template stateless.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install '+cluster_name
+		cmd='./teka lab provision --template stateless.yaml '+cluster_name+' --size '+str(size)+' --os ubuntu18 --env='+env+' && ./teka install '+cluster_name
 	os.system(cmd)
 
 def particular_build_stateful():
@@ -104,14 +104,14 @@ def particular_build_stateful():
 		print("Cluster name : "+cluster_name)		
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : "+ver_in)
-		cmd='./teka lab provision --template stateful.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
+		cmd='./teka lab provision --template stateful.yaml '+cluster_name+' --size '+str(size)+' --os ubuntu18 --env='+env+' && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
 		print("Installing cluster with latest Default Build")
 		print("Installing cluster with below mentioned details ")
 		print("Cluster name :"+cluster_name)		
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
-		cmd='./teka lab provision --template stateful.yaml '+cluster_name+' --size '+str(size)+' --env='+env+' && ./teka install '+cluster_name
+		cmd='./teka lab provision --template stateful.yaml '+cluster_name+' --size '+str(size)+' --os ubuntu18 --env='+env+' && ./teka install '+cluster_name
 	os.system(cmd)
 
 def custom_details():
@@ -139,14 +139,14 @@ def custom_details():
 		print("Cluster name : "+cluster_name)
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : "+ver_in)
-		cmd='./teka lab provision --template='+template+' '+cluster_name+' --size '+str(size)+' --env='+inp_env+' && ./teka install --from-version '+ver_in+' '+cluster_name
+		cmd='./teka lab provision --template='+template+' '+cluster_name+' --size '+str(size)+' --os ubuntu18 --env='+inp_env+' && ./teka install --from-version '+ver_in+' '+cluster_name
 	else:
 		print("Installing cluster with latest Default Build")
 		print("Installing cluster with below mentioned details ")
 		print("Cluster name :"+cluster_name)
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
-		cmd='./teka lab provision --template='+template+' '+cluster_name+' --size '+str(size)+' --env='+inp_env+' && ./teka install '+cluster_name
+		cmd='./teka lab provision --template='+template+' '+cluster_name+' --size '+str(size)+' --os ubuntu18 --env='+inp_env+' && ./teka install '+cluster_name
 	os.system(cmd)
 
 def mbc_cluster():
@@ -179,7 +179,8 @@ def mbc_cluster():
 		print("Size of the BE :",size)
 		print("Build to be installed in the cluster : "+ver_in)
 		print("ionodes : "+str(io_node))
-		cmd='./teka lab provision '+cluster_name+' --size '+str(size)+' --type i3.xlarge --template default.yaml --env '+inp_env+' --ionode-count '+str(io_node)+' --mbc-installation=yes -f && ./teka install --from-version '+ver_in+' '+cluster_name
+		cmd='./teka lab provision '+cluster_name+' --size '+str(size)+' --type i3.xlarge --template stateless.yaml --env '+inp_env+' --os ubuntu20 --ionode-count '+str(io_node)+' --mbc-installation=yes -f --clusterize-hosts-num 6 && ./teka install --from-version '+ver_in+' '+cluster_name
+
 	else:
 		print("Installing cluster with latest Default Build")
 		print("Installing cluster with below mentioned details ")
@@ -189,7 +190,7 @@ def mbc_cluster():
 		print("Type : MBC ")
 		print("ionodes : "+str(io_node))
 		print("Build to be installed in the cluster : Latest build (Fetching by System) ")
-		cmd='./teka lab provision '+cluster_name+' --size '+str(size)+' --type i3.xlarge --template default.yaml --env '+inp_env+' --ionode-count '+str(io_node)+' --mbc-installation=yes -f && ./teka install '+cluster_name
+		cmd='./teka lab provision '+cluster_name+' --size '+str(size)+' --type i3.xlarge --template stateless.yaml --env '+inp_env+' --os ubuntu20 --ionode-count '+    str(io_node)+' --mbc-installation=yes -f --clusterize-hosts-num 6 && ./teka install --from-version '+ver_in+' '+cluster_name
 	os.system(cmd)
 
 def tesla_fd_config():

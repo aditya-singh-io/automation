@@ -49,11 +49,13 @@ time.sleep(5)
 cmd='weka local resources'
 os.system(cmd)
 #creating compute container
-inp_core=input("Enter number of cores for 'compute' container : ")
-cmd='seq 0 {}  | xargs -n1 -IH -P10 ssh root@{}-H sudo weka local setup host --name compute --base-port 21000 --cores={} --core-ids 2 --only-compute-cores --memory 1GB --join-ips={}'.format(b_int_host,cluster_name,int(inp_core),ip.split(',')[0])
-print(cmd)
-os.system(cmd)
-time.sleep(5)
+inp_param=input("Do you want to create compute node? y or Y")
+if 'y' in inp_param or 'Y' in inp_param:
+    inp_core=input("Enter number of cores for 'compute' container : ")
+    cmd='seq 0 {}  | xargs -n1 -IH -P10 ssh root@{}-H sudo weka local setup host --name compute --base-port 21000 --cores={} --core-ids 2 --only-compute-cores --memory  1GB --join-ips={}'.format(b_int_host,cluster_name,int(inp_core),ip.split(',')[0])
+    print(cmd)
+    os.system(cmd)
+    time.sleep(5)
 
 #listing cluster details
 cmd='weka cluster host'
@@ -80,13 +82,14 @@ for i in range(0,int(b_host)):
 	print(cmd)	
 	os.system(cmd)	
 
-#adding net devices in all backends for frontend
-inp_dev=input("Enter the the net device for 'compute' container for backend {} : ".format(cluster_name))
-for i in range(0,int(b_host)):
-	inp_ip=input("Enter the the IP for 'compute' container for backend {}-{} : ".format(cluster_name,i))
-	cmd='ssh {}-{} "weka local resources net add {} --container compute --ips {} --gateway 10.108.0.1 --netmask 16"'.format(cluster_name,i,inp_dev,inp_ip)
-	print(cmd)
-	os.system(cmd)
+#adding net devices in all backends for compute
+if 'y' in inp_param or 'Y' in inp_param:
+    inp_dev=input("Enter the the net device for 'compute' container for backend {} : ".format(cluster_name))
+    for i in range(0,int(b_host)):
+	    inp_ip=input("Enter the the IP for 'compute' container for backend {}-{} : ".format(cluster_name,i))
+	    cmd='ssh {}-{} "weka local resources net add {} --container compute --ips {} --gateway 10.108.0.1 --netmask 16"'.format(cluster_name,i,inp_dev,inp_ip)
+	    print(cmd)
+	    os.system(cmd)
 
 #creating failure domain
 cmd="for i in  `seq  0 11 `; do weka cluster host failure-domain $i --name FD-$i; done"

@@ -7,10 +7,9 @@ subclusters:
     fe_dedicated_cores: 4
     disks_num: 14
 
+iodode_count: 14
   clients:
     profile: profiles/client-multi-instance
-    size: 1
+    size: 3
     instance_types: m5.xlarge
- 
-
 

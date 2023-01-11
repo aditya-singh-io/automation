@@ -1,0 +1,8 @@
+subclusters:
+  primary:
+    host_role: APPLIANCE
+    size: 6
+    ionode_count: 4
+  Clients:
+    host_role: CLIENT
+    size: 3

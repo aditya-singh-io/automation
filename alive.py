@@ -32,7 +32,7 @@ for i in range(1,int(inp_hours)+1):
     print("Machine running from  "+str(i)+" hour ")
     os.system(cmd_alive)
     time.sleep(3600)
-    if i==48:  
+    if i==100:  
         cmd_kill="./teka lab kill --destroy "+cluster_name
         os.system(cmd_kill)
         print("Cluster Destroyed Successfully ")
